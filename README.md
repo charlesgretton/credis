@@ -25,6 +25,13 @@ To run through a number of credis tests run (presupposed that a Redis server is 
   ./credis-test
 ```
 
+For use with collectd, you can also now install: (Check `Makefile` to see paths where it will be installed)
+
+```
+  make
+  make install
+```
+
 Authors
 =======
 

@@ -29,5 +29,8 @@ credis.o: credis.c credis.h Makefile
 
 install:
 	@echo "Installing credis library"
+	cp -f libcredis.so /usr/lib
+	cp -f libcredis.a /usr/include
+	cp -f credis.h /usr/include
 clean:
 	rm -f *.o *~ $(TARGETS)
