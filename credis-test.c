@@ -118,6 +118,14 @@ int main(int argc, char **argv) {
   printf("> vm_enabled: %d\n", info.vm_enabled);
   printf("> role: %d\n", info.role);
 
+  printf("\n\n************* sets ************************************ \n");
+
+  rc = credis_sadd(redis, "fruits", "banana");
+  printf("sadd returned: %d\n", rc);
+
+  rc = credis_sadd(redis, "fruits", "apple");
+  printf("sadd returned: %d\n", rc);
+
   credis_close(redis);
 
   return 0;

@@ -751,3 +751,30 @@ int credis_slaveof(REDIS rhnd, const char *host, int port)
   else
     return cr_sendfandreceive(rhnd, CR_INLINE, "SLAVEOF %s %d\r\n", host, port);
 }
+
+static int cr_setaddrem(REDIS rhnd, const char *cmd, const char *key, const char *member)
+{
+  int rc = cr_sendfandreceive(rhnd, CR_INT, "%s %s %zu\r\n%s\r\n",
+                              cmd, key, strlen(member), member);
+
+  if (rc == 0 && rhnd->reply.integer == 0)
+    rc = -1;
+
+  return rc;
+}
+
+int credis_zadd(REDIS rhnd, const char *key, double score, const char *member)
+{
+  int rc = cr_sendfandreceive(rhnd, CR_INT, "ZADD %s %f %zu\r\n%s\r\n",
+                              key, score, strlen(member), member);
+
+  if (rc == 0 && rhnd->reply.integer == 0)
+    rc = -1;
+
+  return rc;
+}
+
+int credis_sadd(REDIS rhnd, const char *key, const char *member)
+{
+  return cr_setaddrem(rhnd, "SADD", key, member);
+}

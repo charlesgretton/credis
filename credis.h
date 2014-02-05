@@ -161,6 +161,17 @@ int credis_ping(REDIS rhnd);
 char* credis_errorreply(REDIS rhnd);
 
 /*
+ * Commands used by collectd write_redis
+ */
+
+/* returns -1 if member was already a member of the sorted set and only score was updated,
+ * 0 is returned if the new element was added */
+int credis_zadd(REDIS rhnd, const char *key, double score, const char *member);
+
+/* returns -1 if the given member was already a member of the set */
+int credis_sadd(REDIS rhnd, const char *key, const char *member);
+
+/*
  * Remote server control commands
  */
 
