@@ -1,4 +1,5 @@
-CFLAGS = -g -O2 -Wall
+CC=g++
+CFLAGS = -std=c++11 -g -O2 -Wall
 LDFLAGS =
 # CPPFLAGS = -DPRINTDEBUG
 
@@ -24,8 +25,8 @@ libcredis.a: credis.o
 libcredis.so: credis.o
 	$(CC) $(SHAREDLIB_LINK_OPTIONS)$@ -o $@ $^
 
-credis.o: credis.c credis.h Makefile
-	$(CC) -c -fPIC $(CFLAGS) $(CPPFLAGS) -o $@ credis.c
+credis.o: credis.cc credis.hh Makefile
+	$(CC) -c -fPIC $(CFLAGS) $(CPPFLAGS) -o $@ credis.cc
 
 install:
 	@echo "Installing credis library"
